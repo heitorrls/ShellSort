@@ -5,7 +5,8 @@ from dataclasses import dataclass
 import matplotlib.pyplot as plt
 
 
-# 1. MODELOS DE DADOS
+
+# modelos de dadops:
 
 @dataclass
 class Pessoa:
@@ -16,7 +17,7 @@ class Pessoa:
         return f"{self.nome}({self.idade})"
 
 
-# 2. SHELL SORT
+#shell sort
 
 def shell_sort(lista, key=lambda x: x, reverse=False):
     n = len(lista)
@@ -38,7 +39,7 @@ def shell_sort(lista, key=lambda x: x, reverse=False):
             lista[j] = temp
 
 
-# 3. GERAÇÃO DE DADOS
+#gerando dados aleatorios
 
 def gerar_numeros(n):
     return [random.randint(0, n * 10) for _ in range(n)]
@@ -59,7 +60,7 @@ def gerar_pessoas(n):
     ]
 
 
-# 4. MEDIÇÃO DE TEMPO
+#medindo o tempo
 
 def medir_tempo_execucao(dados, key=lambda x: x, reverse=False):
     copia = dados.copy()
@@ -68,7 +69,8 @@ def medir_tempo_execucao(dados, key=lambda x: x, reverse=False):
     fim = time.perf_counter()
     return (fim - inicio) * 1000
 
-# 5. GRÁFICOS (MODIFICADO PARA COLAB)
+
+#gerando graficos
 
 def gerar_graficos(tamanhos, resultados, titulo, nome_arquivo):
     plt.figure()
@@ -81,11 +83,11 @@ def gerar_graficos(tamanhos, resultados, titulo, nome_arquivo):
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.show()  
-    plt.savefig(nome_arquivo, dpi=300)  
+    plt.show()
+    plt.savefig(nome_arquivo, dpi=300)
 
 
-# 6. EXPERIMENTOS AUTOMÁTICOS
+# testes com diferentes elementos
 
 def rodar_experimentos():
     tamanhos = [100, 1_000, 10_000, 100_000]
@@ -94,7 +96,7 @@ def rodar_experimentos():
     resultados_strings = {"crescente": [], "decrescente": []}
     resultados_pessoas = {"crescente": [], "decrescente": []}
 
-    print("\n=== TESTES COM NÚMEROS ===")
+    print("\nTESTES COM NÚMEROS")
     for n in tamanhos:
         dados_base = gerar_numeros(n)
         t_c = medir_tempo_execucao(dados_base)
@@ -105,7 +107,7 @@ def rodar_experimentos():
 
     gerar_graficos(tamanhos, resultados_numeros, "Shell Sort - Números", "shellsort_numeros.png")
 
-    print("\n=== TESTES COM STRINGS ===")
+    print("\nTESTES COM STRINGS")
     for n in tamanhos:
         dados_base = gerar_strings(n)
         t_c = medir_tempo_execucao(dados_base)
@@ -116,7 +118,7 @@ def rodar_experimentos():
 
     gerar_graficos(tamanhos, resultados_strings, "Shell Sort - Strings", "shellsort_strings.png")
 
-    print("\n=== TESTES COM OBJETOS ===")
+    print("\nTESTES COM OBJETOS")
     for n in tamanhos:
         dados_base = gerar_pessoas(n)
         t_c = medir_tempo_execucao(dados_base, key=lambda p: p.idade)
@@ -130,11 +132,10 @@ def rodar_experimentos():
     print("\n✔ Gráficos gerados e exibidos com sucesso!")
 
 
-# 7. DEMONSTRAÇÃO INTERATIVA
-
+# demonstração de cada tipo de elemento
 
 def demonstracao():
-    print(" DEMONSTRAÇÃO DO SHELL SORT ")
+    print("DEMONSTRAÇÃO DO SHELL SORT")
     print("1 - Números")
     print("2 - Strings")
     print("3 - Objetos")
@@ -150,15 +151,13 @@ def demonstracao():
     print("\nOriginal:", dados)
     shell_sort(dados, key=key, reverse=reverse)
     print("Ordenada:", dados)
-    print("\n Demonstração concluida")
+    print("\n✔ Demonstração concluída!")
 
 
-# 8. MENU ORIGINAL
-
+#menu
 
 if __name__ == "__main__":
     while True:
-        print("\n MENU SHELL SORT ")
         print("1 - Demonstração")
         print("2 - Experimentos completos + gráficos")
         print("0 - Sair")
