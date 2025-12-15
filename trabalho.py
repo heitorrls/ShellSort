@@ -19,24 +19,28 @@ class Pessoa:
 
 #shell sort
 
+
+#aqui está o metodo shell sort, ele recebe uma lista e começa a ordenar por meio do shell sort
+#uma função key para definir o critério de ordenação e um parâmetro reverse para ordenar em ordem decrescente se necessário
+#o algoritmo utiliza uma sequência de gaps pré-definida para melhorar a eficiência da ordenação
 def shell_sort(lista, key=lambda x: x, reverse=False):
     n = len(lista)
-    gaps = [701, 301, 132, 57, 23, 10, 4, 1]
+    gaps = [701, 301, 132, 57, 23, 10, 4, 1] #aqui mede a "distancia" entre os elementos que vao ser comparados 
     gaps = [g for g in gaps if g < n]
-    if not gaps:
-        gaps = [1]
+    if not gaps:  
+        gaps = [1]  # se a lista for muito pequena, usa gap 1
 
     for gap in gaps:
         for i in range(gap, n):
-            temp = lista[i]
+            temp = lista[i] # o elemento atual é armazenado em temp
             j = i
-            while j >= gap and (
+            while j >= gap and ( # aqui ocorre a comparação e troca dos elementos. Esse processo continua até que o elemento temp esteja na posição correta
                 (not reverse and key(lista[j - gap]) > key(temp)) or
                 (reverse and key(lista[j - gap]) < key(temp))
             ):
                 lista[j] = lista[j - gap]
                 j -= gap
-            lista[j] = temp
+            lista[j] = temp # o elemento temp é colocado na posição correta
 
 
 #gerando dados aleatorios
